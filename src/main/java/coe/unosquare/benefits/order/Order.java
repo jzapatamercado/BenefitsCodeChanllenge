@@ -27,47 +27,68 @@ public class Order {
         products = productsMap;
     }
 
+    private Boolean quantityVerification(int limit) {
+        return products.values()
+                .stream()
+                .reduce(0, (totalProductCount, quantity) -> totalProductCount += quantity) >= limit;
+    }
+
+    private Boolean amountVerification(int amount) {
+        return products.entrySet()
+                .stream()
+                .mapToDouble(product -> product.getKey().getPrice() * product.getValue())
+                .sum() >= 100;
+    }
     /**
      * Pay double.
      *
      * @param paymentType the payment type
      * @return the double
      */
-    public Double pay(final String paymentType) {
-        Double discount;
-        if (paymentType.equals("Visa")) {
-            if (products.values()
-                    .stream()
-                    .reduce(0, (totalProductCount, quantity) -> totalProductCount += quantity) >= 10) {
-                discount = 0.15;
-            } else if (products.values()
-                    .stream()
-                    .reduce(0, (totalProductCount, quantity) -> totalProductCount += quantity) >= 7) {
-                discount = 0.10;
-            } else {
-                discount = 0.05;
+    public double pay(final String paymentType) {
+        double discount = 0.0;
+        switch(paymentType){
+            case "Visa": {
+                discount = quantityBasedDiscount();
+                break;
             }
-        } else if (paymentType.equals("Mastercard")) {
-            if (products.entrySet()
-                    .stream()
-                    .mapToDouble(product -> product.getKey().getPrice() * product.getValue())
-                    .sum() >= 100) {
-                discount = 0.17;
-            } else if (products.entrySet().stream()
-                    .mapToDouble(product -> product.getKey().getPrice() * product.getValue())
-                    .sum() >= 75) {
-                discount = 0.12;
-            } else {
-                discount = 0.08;
+            case "Mastercard":{
+                discount = amountBasedDiscount();
+                break;
             }
-        } else {
-            discount = 0.0;
+            default: {
+                discount = 0.0;
+                }
         }
-        double subtotal = products.entrySet()
-                            .stream()
-                            .mapToDouble(product -> product.getKey().getPrice() * product.getValue())
-                            .sum();
+        double subtotal = getSubTotal();
         return subtotal - subtotal * discount;
+    }
+
+    private double quantityBasedDiscount() {
+        double discount = 0.05;
+        if (quantityVerification(10)) {
+            discount = 0.15;
+        } else if (quantityVerification(7)) {
+            discount = 0.10;
+        }
+        return discount;
+    }
+
+    private double amountBasedDiscount() {
+        double discount = 0.08;
+        if (amountVerification(100)) {
+            discount = 0.17;
+        } else if (amountVerification(75)) {
+            discount = 0.12;
+        }
+        return discount;
+    }
+
+    private Double getSubTotal(){
+        return products.entrySet()
+                .stream()
+                .mapToDouble(product -> product.getKey().getPrice() * product.getValue())
+                .sum();
     }
 
     /**
