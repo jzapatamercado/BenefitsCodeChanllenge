@@ -18,7 +18,7 @@ The goal is to reduce complexity and make it more SOLID.
 - ❗Refactor to allow creation of small testable units.
 - ❗Write a simple Javadoc with essential information for one or more of the newly created methods or classes.
 
-Recent Changes:
+### Recent Changes:
 2023-02-10
 Code Challenge refactor.
 
