@@ -8,6 +8,8 @@
 
 package coe.unosquare.benefits.util;
 
+import coe.unosquare.benefits.exception.InvalidAmountException;
+import coe.unosquare.benefits.exception.InvalidQuantityException;
 import coe.unosquare.benefits.order.Order;
 import coe.unosquare.benefits.product.Product;
 import java.math.BigDecimal;
@@ -31,15 +33,16 @@ public final class PayOrderSimulator {
      * @return the double
      */
     public static Double payOrder(final Map<Product, Integer> products,
-                                  final String paymentType) {
+                                  final String paymentType) throws InvalidQuantityException, InvalidAmountException {
         Order order = new Order(products);
         Double subtotal = products.entrySet()
                             .stream()
                             .mapToDouble(product -> product.getKey().getPrice() * product.getValue())
                             .sum();
-        return new BigDecimal((subtotal - order.pay(paymentType)) / subtotal)
+        Double total = new BigDecimal((subtotal - order.pay(paymentType)) / subtotal)
                 .setScale(2, RoundingMode.HALF_EVEN)
                 .doubleValue();
+        return total;
     }
 }
 

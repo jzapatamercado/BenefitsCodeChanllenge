@@ -9,6 +9,8 @@
 package coe.unosquare.benefits.order;
 
 import coe.unosquare.benefits.discount.Discount;
+import coe.unosquare.benefits.exception.InvalidAmountException;
+import coe.unosquare.benefits.exception.InvalidQuantityException;
 import coe.unosquare.benefits.product.Product;
 
 import java.util.Map;
@@ -37,8 +39,9 @@ public class Order {
      * @param paymentType the payment type
      * @return the double
      */
-    public Double pay(final String paymentType) {
-        double discount = Discount.getDiscount(products,paymentType);
+    public Double pay(final String paymentType) throws InvalidQuantityException, InvalidAmountException {
+        double discount = 0;
+        discount = Discount.getDiscount(products, paymentType);
         double subtotal = getSubTotal();
         return subtotal - subtotal * discount;
     }
