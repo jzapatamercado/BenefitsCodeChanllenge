@@ -1,6 +1,6 @@
-package coe.unosquare.benefits.benefit;
+package coe.unosquare.benefits.util.benefit;
 
-import coe.unosquare.benefits.product.Product;
+import coe.unosquare.benefits.model.Product;
 
 import java.util.Map;
 
@@ -23,5 +23,5 @@ public interface BenefitStrategy {
      * @param limits   the limits
      * @return the boolean
      */
-    Boolean criteriaEvaluation(Map<Product, Integer> products, ConditionAttributes limits);
+    boolean criteriaEvaluation(Map<Product, Integer> products, ConditionAttributes limits);
 }

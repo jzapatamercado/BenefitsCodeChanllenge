@@ -8,7 +8,7 @@
 
 package coe.unosquare.benefits.util;
 
-import coe.unosquare.benefits.product.Product;
+import coe.unosquare.benefits.model.Product;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
@@ -24,7 +24,8 @@ public final class ProductGenerator {
     /**
      * Hide constructor to avoid instances of this utility class.
      */
-    private ProductGenerator() { }
+    private ProductGenerator() {
+    }
 
     /**
      * Generate products map.
@@ -37,7 +38,7 @@ public final class ProductGenerator {
         IntStream.rangeClosed(1, expectedSize).forEach(id -> {
             products.put(new Product("Product " + id, //product name
                             Double.parseDouble(new DecimalFormat("0.00")
-                                                .format(new Random().nextDouble() * 10.00)), //price
+                                    .format(new Random().nextDouble() * 10.00)), //price
                             new Random().nextInt(3) + 1), //type
                     1); //quantity
         });
@@ -56,8 +57,9 @@ public final class ProductGenerator {
         int id = 1;
         while (total < expectedTotal) {
             double price = Double.parseDouble(new DecimalFormat("0.00")
-                                                .format(new Random().nextDouble() * 10.00));
+                    .format(new Random().nextDouble() * 10.00));
             int quantity = new Random().nextInt(5) + 1;
+            price = priceAdjustment(price, total, quantity, expectedTotal);
             products.put(new Product("Product " + id, //product name
                             price,
                             new Random().nextInt(3) + 1), //type
@@ -83,8 +85,9 @@ public final class ProductGenerator {
         int id = 1;
         while (total < expectedTotal && count < expectedSize) {
             double price = Double.parseDouble(new DecimalFormat("0.00")
-                    .format(expectedTotal/expectedSize));
+                    .format(expectedTotal / expectedSize));
             int quantity = expectedSize;
+            price = priceAdjustment(price, total, quantity, expectedTotal);
             products.put(new Product("Product " + id, //product name
                             price,
                             new Random().nextInt(3) + 1), //type
@@ -94,5 +97,12 @@ public final class ProductGenerator {
             id++;
         }
         return products;
+    }
+
+    private static Double priceAdjustment(double price, double total, int quantity, double expectedTotal) {
+        if ((total + price * quantity) > total) {
+            price = (expectedTotal - total) / quantity;
+        }
+        return price;
     }
 }

@@ -1,6 +1,8 @@
-package coe.unosquare.benefits.benefit;
+package coe.unosquare.benefits.util.benefit;
 
-import coe.unosquare.benefits.product.Product;
+import coe.unosquare.benefits.model.Product;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
@@ -8,6 +10,7 @@ import java.util.Map;
  * The type Condition validator.
  */
 public class ConditionValidator {
+    private static Logger  logger = LoggerFactory.getLogger(ConditionValidator.class);
     /**
      * Amount validation boolean.
      *
@@ -15,12 +18,12 @@ public class ConditionValidator {
      * @param limit    the limit
      * @return the boolean
      */
-    public static Boolean amountValidation(Map<Product, Integer> products, Double limit){
+    public static boolean amountValidation(Map<Product, Integer> products, Double limit){
         Double amount = products.entrySet()
                 .stream()
                 .mapToDouble(product -> product.getKey().getPrice() * product.getValue())
                 .sum();
-        System.out.println("amount "+amount);
+        logger.info("Amount: {}",amount);
         return  amount >= limit;
     }
 
@@ -31,11 +34,12 @@ public class ConditionValidator {
      * @param limit    the limit
      * @return the boolean
      */
-    public static Boolean quantityValidation(Map<Product, Integer> products, Integer limit){
+    public static boolean quantityValidation(Map<Product, Integer> products, Integer limit){
         Integer qty = products.values()
                 .stream()
                 .reduce(0, (totalProductCount, quantity) -> totalProductCount += quantity);
-        System.out.println("qty "+qty);
+        logger.info("Quantity: {}",qty);
+
         return  qty >= limit;
     }
 

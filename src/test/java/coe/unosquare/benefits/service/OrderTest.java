@@ -6,13 +6,13 @@
  *  Any illegal reproduction of this content will result in immediate legal action.
  */
 
-package coe.unosquare.benefits.order;
+package coe.unosquare.benefits.service;
 
 import coe.unosquare.benefits.constants.ExceptionMessage;
 import coe.unosquare.benefits.constants.PaymentTypeConstant;
 import coe.unosquare.benefits.exception.InvalidAmountException;
 import coe.unosquare.benefits.exception.InvalidQuantityException;
-import coe.unosquare.benefits.product.Product;
+import coe.unosquare.benefits.model.Product;
 import coe.unosquare.benefits.util.ProductGenerator;
 import org.junit.jupiter.api.Test;
 

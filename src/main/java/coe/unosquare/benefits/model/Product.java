@@ -6,7 +6,7 @@
  *  Any illegal reproduction of this content will result in immediate legal action.
  */
 
-package coe.unosquare.benefits.product;
+package coe.unosquare.benefits.model;
 
 /**
  * The type Product.

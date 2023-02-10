@@ -1,4 +1,4 @@
-package coe.unosquare.benefits.benefit;
+package coe.unosquare.benefits.util.benefit;
 
 /**
  * The type Condition attributes.
