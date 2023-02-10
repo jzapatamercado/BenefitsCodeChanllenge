@@ -8,6 +8,10 @@
 
 package coe.unosquare.benefits.order;
 
+import coe.unosquare.benefits.benefit.AmountBenefitStrategy;
+import coe.unosquare.benefits.benefit.BenefitStrategy;
+import coe.unosquare.benefits.benefit.NonBenefitStrategy;
+import coe.unosquare.benefits.benefit.QuantityBenefitStrategy;
 import coe.unosquare.benefits.product.Product;
 import java.util.Map;
 
@@ -27,61 +31,34 @@ public class Order {
         products = productsMap;
     }
 
-    private Boolean quantityVerification(int limit) {
-        return products.values()
-                .stream()
-                .reduce(0, (totalProductCount, quantity) -> totalProductCount += quantity) >= limit;
-    }
-
-    private Boolean amountVerification(int amount) {
-        return products.entrySet()
-                .stream()
-                .mapToDouble(product -> product.getKey().getPrice() * product.getValue())
-                .sum() >= 100;
-    }
     /**
      * Pay double.
      *
      * @param paymentType the payment type
      * @return the double
      */
-    public double pay(final String paymentType) {
-        double discount = 0.0;
-        switch(paymentType){
-            case "Visa": {
-                discount = quantityBasedDiscount();
-                break;
-            }
-            case "Mastercard":{
-                discount = amountBasedDiscount();
-                break;
-            }
-            default: {
-                discount = 0.0;
-                }
-        }
+    public Double pay(final String paymentType) {
+        double discount = getDiscount(paymentType);
         double subtotal = getSubTotal();
         return subtotal - subtotal * discount;
     }
 
-    private double quantityBasedDiscount() {
-        double discount = 0.05;
-        if (quantityVerification(10)) {
-            discount = 0.15;
-        } else if (quantityVerification(7)) {
-            discount = 0.10;
+    private double getDiscount(String paymentType){
+        BenefitStrategy benefitStrategy;
+        switch(paymentType){
+            case "Visa": {
+                benefitStrategy = new QuantityBenefitStrategy();
+                break;
+            }
+            case "Mastercard":{
+                benefitStrategy = new AmountBenefitStrategy();
+                break;
+            }
+            default: {
+                benefitStrategy = new NonBenefitStrategy();
+            }
         }
-        return discount;
-    }
-
-    private double amountBasedDiscount() {
-        double discount = 0.08;
-        if (amountVerification(100)) {
-            discount = 0.17;
-        } else if (amountVerification(75)) {
-            discount = 0.12;
-        }
-        return discount;
+       return benefitStrategy.calculateBenefit(products);
     }
 
     private Double getSubTotal(){
