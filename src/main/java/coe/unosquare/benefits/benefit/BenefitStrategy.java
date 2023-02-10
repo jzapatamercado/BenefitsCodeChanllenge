@@ -6,5 +6,5 @@ import java.util.Map;
 
 public interface BenefitStrategy {
     Double calculateBenefit(Map<Product, Integer> products);
-    Boolean criteriaEvaluation(Map<Product, Integer> products, Integer limit);
+    Boolean criteriaEvaluation(Map<Product, Integer> products, ConditionAttributes limits);
 }

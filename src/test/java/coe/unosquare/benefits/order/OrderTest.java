@@ -17,6 +17,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class OrderTest {
     @Test
+    void orderWithNonExistentPaymentProductsDiscountTest() {
+        Map<Product, Integer> products = ProductGenerator.generateProducts(51);
+        assertEquals(0.15, payOrder(products, "Visa"));
+    }
+    @Test
     void orderWithVisaMoreThan10ProductsDiscountTest() {
         Map<Product, Integer> products = ProductGenerator.generateProducts(15);
         assertEquals(0.15, payOrder(products, "Visa"));
@@ -75,4 +80,33 @@ class OrderTest {
         Map<Product, Integer> products = ProductGenerator.generateProducts(50.0);
         assertEquals(0.08, payOrder(products, "Mastercard"));
     }
+
+    @Test
+    void orderWithPaypalMoreThan100AmountLessThan10QuantityDiscountTest() {
+        Map<Product, Integer> products = ProductGenerator.generateProducts(101.0, 9);
+        System.out.println(products);
+        assertEquals(0.25, payOrder(products, "Paypal"));
+    }
+
+    @Test
+    void orderWithPaypalLessThan100AmountMoreThan10QuantityDiscountTest() {
+        Map<Product, Integer> products = ProductGenerator.generateProducts(99.0, 11);
+        System.out.println(products);
+        assertEquals(0.25, payOrder(products, "Paypal"));
+    }
+
+    @Test
+    void orderWithPaypalMoreThan100AmountMoreThan10QuantityDiscountTest() {
+        Map<Product, Integer> products = ProductGenerator.generateProducts(101.0, 11);
+        System.out.println(products);
+        assertEquals(0.25, payOrder(products, "Paypal"));
+    }
+
+    @Test
+    void orderWithPaypalLessThan100AmountLessThan10QuantityDiscountTest() {
+        Map<Product, Integer> products = ProductGenerator.generateProducts(99.0, 9);
+        System.out.println(products);
+        assertEquals(0, payOrder(products, "Paypal"));
+    }
+
 }

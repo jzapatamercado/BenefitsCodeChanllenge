@@ -68,4 +68,25 @@ public final class ProductGenerator {
         }
         return products;
     }
+
+
+    public static Map<Product, Integer> generateProducts(final Double expectedTotal, final Integer expectedSize) {
+        HashMap<Product, Integer> products = new HashMap<>();
+        double total = 0.0;
+        int count = 0;
+        int id = 1;
+        while (total < expectedTotal && count < expectedSize) {
+            double price = Double.parseDouble(new DecimalFormat("0.00")
+                    .format(expectedTotal/expectedSize));
+            int quantity = expectedSize;
+            products.put(new Product("Product " + id, //product name
+                            price,
+                            new Random().nextInt(3) + 1), //type
+                    quantity); //quantity
+            total = total + price * quantity;
+            count += quantity;
+            id++;
+        }
+        return products;
+    }
 }
