@@ -5,6 +5,9 @@ import coe.unosquare.benefits.product.Product;
 import java.util.Calendar;
 import java.util.Map;
 
+/**
+ * The type Pay pal benefit strategy.
+ */
 public class PayPalBenefitStrategy implements BenefitStrategy {
     private  Calendar cal = Calendar.getInstance();
 
@@ -13,7 +16,7 @@ public class PayPalBenefitStrategy implements BenefitStrategy {
         double discount = 0;
         if (criteriaEvaluation(products, new ConditionAttributes(10, 100.0))) {
             discount = 0.25;
-        } 
+        }
         return discount;
     }
 

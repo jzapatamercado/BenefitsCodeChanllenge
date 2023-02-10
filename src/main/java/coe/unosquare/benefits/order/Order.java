@@ -38,6 +38,8 @@ public class Order {
      *
      * @param paymentType the payment type
      * @return the double
+     * @throws InvalidQuantityException the invalid quantity exception
+     * @throws InvalidAmountException   the invalid amount exception
      */
     public Double pay(final String paymentType) throws InvalidQuantityException, InvalidAmountException {
         double discount = 0;

@@ -4,6 +4,9 @@ import coe.unosquare.benefits.product.Product;
 
 import java.util.Map;
 
+/**
+ * The type Visa benefit strategy.
+ */
 public class VisaBenefitStrategy implements BenefitStrategy {
     @Override
     public Double calculateBenefit(Map<Product, Integer> products) {

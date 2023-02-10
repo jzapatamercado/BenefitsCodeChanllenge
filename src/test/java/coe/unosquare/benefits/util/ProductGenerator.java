@@ -29,8 +29,7 @@ public final class ProductGenerator {
     /**
      * Generate products map.
      *
-     * @param expectedSize the expected size of the map which matches
-     *                     the number of different products in the cart.
+     * @param expectedSize the expected size of the map which matches                     the number of different products in the cart.
      * @return the map
      */
     public static Map<Product, Integer> generateProducts(final Integer expectedSize) {
@@ -70,6 +69,13 @@ public final class ProductGenerator {
     }
 
 
+    /**
+     * Generate products map.
+     *
+     * @param expectedTotal the expected total
+     * @param expectedSize  the expected size
+     * @return the map
+     */
     public static Map<Product, Integer> generateProducts(final Double expectedTotal, final Integer expectedSize) {
         HashMap<Product, Integer> products = new HashMap<>();
         double total = 0.0;

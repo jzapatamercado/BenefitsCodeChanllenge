@@ -9,7 +9,19 @@ import coe.unosquare.benefits.product.Product;
 
 import java.util.Map;
 
+/**
+ * The type Discount.
+ */
 public class Discount {
+    /**
+     * Gets discount.
+     *
+     * @param products    the products
+     * @param paymentType the payment type
+     * @return the discount
+     * @throws InvalidQuantityException the invalid quantity exception
+     * @throws InvalidAmountException   the invalid amount exception
+     */
     public static double getDiscount(Map<Product, Integer> products, String paymentType) throws InvalidQuantityException, InvalidAmountException {
         if(ConditionValidator.amountValidation(products,0.0)){
             throw new InvalidAmountException(ExceptionMessage.INVALID_AMOUNT);

@@ -4,7 +4,17 @@ import coe.unosquare.benefits.product.Product;
 
 import java.util.Map;
 
+/**
+ * The type Condition validator.
+ */
 public class ConditionValidator {
+    /**
+     * Amount validation boolean.
+     *
+     * @param products the products
+     * @param limit    the limit
+     * @return the boolean
+     */
     public static Boolean amountValidation(Map<Product, Integer> products, Double limit){
         Double amount = products.entrySet()
                 .stream()
@@ -14,6 +24,13 @@ public class ConditionValidator {
         return  amount >= limit;
     }
 
+    /**
+     * Quantity validation boolean.
+     *
+     * @param products the products
+     * @param limit    the limit
+     * @return the boolean
+     */
     public static Boolean quantityValidation(Map<Product, Integer> products, Integer limit){
         Integer qty = products.values()
                 .stream()
