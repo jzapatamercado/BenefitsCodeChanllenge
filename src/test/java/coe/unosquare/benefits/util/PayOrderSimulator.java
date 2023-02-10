@@ -8,8 +8,12 @@
 
 package coe.unosquare.benefits.util;
 
-import coe.unosquare.benefits.order.Order;
-import coe.unosquare.benefits.product.Product;
+import coe.unosquare.benefits.exception.InvalidAmountException;
+import coe.unosquare.benefits.exception.InvalidQuantityException;
+import coe.unosquare.benefits.model.Order;
+import coe.unosquare.benefits.model.Product;
+import coe.unosquare.benefits.util.payment.PaymentCalculation;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Map;
@@ -18,28 +22,27 @@ import java.util.Map;
  * The type Pay order simulator.
  */
 public final class PayOrderSimulator {
-    /**
-     * Hide constructor to avoid instances of this utility class.
-     */
-    private PayOrderSimulator() { }
+    private PayOrderSimulator() {
+    }
 
     /**
-     * Method to simulate the process of an order being paid.
+     * Pay order double.
      *
      * @param products    the products
      * @param paymentType the payment type
      * @return the double
+     * @throws InvalidQuantityException the invalid quantity exception
+     * @throws InvalidAmountException   the invalid amount exception
      */
-    public static Double payOrder(final Map<Product, Integer> products,
-                                  final String paymentType) {
+    public static double payOrder(final Map<Product, Integer> products,
+                                  final String paymentType) throws InvalidQuantityException, InvalidAmountException {
         Order order = new Order(products);
-        Double subtotal = products.entrySet()
-                            .stream()
-                            .mapToDouble(product -> product.getKey().getPrice() * product.getValue())
-                            .sum();
-        return new BigDecimal((subtotal - order.pay(paymentType)) / subtotal)
+        double subtotal = PaymentCalculation.getSubTotal(order.getProducts());
+        double total = new BigDecimal((subtotal - PaymentCalculation.pay(order, paymentType)) / subtotal)
                 .setScale(2, RoundingMode.HALF_EVEN)
                 .doubleValue();
+        order.print();
+        return total;
     }
 }
 
