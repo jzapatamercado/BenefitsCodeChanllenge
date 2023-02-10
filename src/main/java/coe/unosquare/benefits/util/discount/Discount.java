@@ -1,9 +1,6 @@
 package coe.unosquare.benefits.util.discount;
 
-import coe.unosquare.benefits.constants.ExceptionMessage;
 import coe.unosquare.benefits.constants.PaymentTypeConstant;
-import coe.unosquare.benefits.exception.InvalidAmountException;
-import coe.unosquare.benefits.exception.InvalidQuantityException;
 import coe.unosquare.benefits.model.Product;
 import coe.unosquare.benefits.util.benefit.*;
 
@@ -11,6 +8,7 @@ import java.util.Map;
 
 /**
  * The type Discount.
+ * This class based on the distinct BenefitPayment strategies calculates the final discount.
  */
 public class Discount {
     /**
@@ -19,11 +17,18 @@ public class Discount {
      * @param products    the products
      * @param paymentType the payment type
      * @return the discount
-     * @throws InvalidQuantityException the invalid quantity exception
-     * @throws InvalidAmountException   the invalid amount exception
      */
     public static double getDiscount(Map<Product, Integer> products, String paymentType) {
+        return getStrategy(paymentType).calculateBenefit(products);
+    }
 
+    /**
+     * Gets Benefit Strategy based on paymentType.
+     *
+     * @param paymentType the payment type
+     * @return BenefitStrategy
+     */
+    public static BenefitStrategy getStrategy(String paymentType) {
         BenefitStrategy benefitStrategy;
         switch (paymentType) {
             case PaymentTypeConstant.PAYPAL: {
@@ -42,6 +47,6 @@ public class Discount {
                 benefitStrategy = new NonBenefitStrategy();
             }
         }
-        return benefitStrategy.calculateBenefit(products);
+        return benefitStrategy;
     }
 }

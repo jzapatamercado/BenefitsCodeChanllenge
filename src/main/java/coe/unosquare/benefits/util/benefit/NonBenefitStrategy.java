@@ -1,5 +1,6 @@
 package coe.unosquare.benefits.util.benefit;
 
+import coe.unosquare.benefits.model.ConditionAttributes;
 import coe.unosquare.benefits.model.Product;
 
 import java.util.Map;
@@ -14,7 +15,7 @@ public class NonBenefitStrategy implements BenefitStrategy {
     }
 
     @Override
-    public boolean criteriaEvaluation(Map<Product, Integer> products, ConditionAttributes limit) {
+    public boolean criteriaEvaluation(Map<Product, Integer> products, ConditionAttributes attributes) {
         return false;
     }
 }

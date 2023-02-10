@@ -1,7 +1,8 @@
-coe.unosquare.benefits.benefit
 coe.unosquare.benefits.constants
-coe.unosquare.benefits.discount
 coe.unosquare.benefits.exception
-coe.unosquare.benefits.service
-coe.unosquare.benefits.product
+coe.unosquare.benefits.model
 coe.unosquare.benefits.util
+coe.unosquare.benefits.util.benefit
+coe.unosquare.benefits.util.condition
+coe.unosquare.benefits.util.discount
+coe.unosquare.benefits.util.payment

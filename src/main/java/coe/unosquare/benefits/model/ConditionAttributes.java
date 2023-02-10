@@ -1,17 +1,20 @@
-package coe.unosquare.benefits.util.benefit;
+package coe.unosquare.benefits.model;
 
 /**
  * The type Condition attributes.
+ * This class could allow us to manage multiple attributes
+ * in initial approach we were able to handle or quantity or amount,
+ * based on this new class we can handle these two combined or include more attributes to be evaluated.
  */
 public class ConditionAttributes {
     /**
      * The Quantity.
      */
-    Integer quantity;
+    private Integer quantity;
     /**
      * The Amount.
      */
-    Double amount;
+    private Double amount;
 
     /**
      * Instantiates a new Condition attributes.

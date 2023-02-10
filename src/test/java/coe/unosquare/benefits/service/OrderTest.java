@@ -143,11 +143,11 @@ class OrderTest {
 
     @Test()
     void orderWithVisa0QuantityDiscountTest_ExceptionVerification() {
-        Map<Product, Integer> products = ProductGenerator.generateProducts( 0);
+        Map<Product, Integer> products = ProductGenerator.generateProducts(0);
         Exception exception = assertThrows(InvalidAmountException.class, () -> {
             payOrder(products, PaymentTypeConstant.VISA);
         });
         assertEquals(ExceptionMessage.INVALID_AMOUNT, exception.getMessage());
     }
-    
+
 }

@@ -33,7 +33,7 @@ public final class ProductGenerator {
      * @param expectedSize the expected size of the map which matches                     the number of different products in the cart.
      * @return the map
      */
-    public static Map<Product, Integer> generateProducts(final Integer expectedSize) {
+    public static Map<Product, Integer> generateProducts(final int expectedSize) {
         HashMap<Product, Integer> products = new HashMap<>();
         IntStream.rangeClosed(1, expectedSize).forEach(id -> {
             products.put(new Product("Product " + id, //product name
@@ -49,9 +49,9 @@ public final class ProductGenerator {
      * Generate products map.
      *
      * @param expectedTotal the expected total amount to pay for the order before discount
-     * @return the map
+     * @return the map Last Modification: Juan Zapata Date: 2023-02-10 Modification: It was required to force the method to generate scenarios with the exact expectedTotal value
      */
-    public static Map<Product, Integer> generateProducts(final Double expectedTotal) {
+    public static Map<Product, Integer> generateProducts(final double expectedTotal) {
         HashMap<Product, Integer> products = new HashMap<>();
         double total = 0.0;
         int id = 1;
@@ -99,7 +99,14 @@ public final class ProductGenerator {
         return products;
     }
 
-    private static Double priceAdjustment(double price, double total, int quantity, double expectedTotal) {
+    /**
+     * Adjust the product price to be within the required test conditions.
+     *
+     * @param price    the expected total
+     * @param quantity the expected size
+     * @return the map
+     */
+    private static double priceAdjustment(double price, double total, int quantity, double expectedTotal) {
         if ((total + price * quantity) > total) {
             price = (expectedTotal - total) / quantity;
         }

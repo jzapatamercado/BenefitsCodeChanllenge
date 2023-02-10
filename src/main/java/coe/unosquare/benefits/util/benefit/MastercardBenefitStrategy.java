@@ -1,6 +1,8 @@
 package coe.unosquare.benefits.util.benefit;
 
+import coe.unosquare.benefits.model.ConditionAttributes;
 import coe.unosquare.benefits.model.Product;
+import coe.unosquare.benefits.util.condition.ConditionValidator;
 
 import java.util.Map;
 
@@ -20,7 +22,7 @@ public class MastercardBenefitStrategy implements BenefitStrategy {
     }
 
     @Override
-    public boolean criteriaEvaluation(Map<Product, Integer> products, ConditionAttributes limit) {
-        return ConditionValidator.amountValidation(products,limit.amount);
+    public boolean criteriaEvaluation(Map<Product, Integer> products, ConditionAttributes attributes) {
+        return ConditionValidator.amountValidation(products, attributes.getAmount());
     }
 }

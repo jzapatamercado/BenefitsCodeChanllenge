@@ -3,7 +3,7 @@ package coe.unosquare.benefits.exception;
 /**
  * The type Invalid amount exception.
  */
-public class InvalidAmountException extends  Exception {
+public class InvalidAmountException extends Exception {
     /**
      * Instantiates a new Invalid amount exception.
      *

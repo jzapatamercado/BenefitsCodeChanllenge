@@ -3,7 +3,7 @@ package coe.unosquare.benefits.exception;
 /**
  * The type Invalid quantity exception.
  */
-public class InvalidQuantityException extends  Exception {
+public class InvalidQuantityException extends Exception {
     /**
      * Instantiates a new Invalid quantity exception.
      *
