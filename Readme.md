@@ -32,3 +32,4 @@ Custom exceptions to control minimal quantity and cost supported by the implemen
 Product generator improved to get an accurate set of products based on desired amount.
 PayPal benefit implemented, giving the benefit if the number of products is 10+ or the cost amount is 100+
 Generation of some model classes to separate their implementation from logic.
+
