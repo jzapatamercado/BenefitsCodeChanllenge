@@ -22,14 +22,14 @@ The goal is to reduce complexity and make it more SOLID.
 2023-02-10
 Code Challenge refactor.
 
-Method Order.pay() simplified and distributed in distinct specialized classes.
-Strategy pattern applied to isolated the distinct types of payments with their own conditions.
-Condition extended to support one or more attributes to be evaluated.
-Logger included into the implementation.
-Unit test to cover the distinct scenarios across the PayOrderSimulator added some negative scenarios.
-Unit test implemented to test some relevant methods located in condition, discount and payment.
-Custom exceptions to control minimal quantity and cost supported by the implementation.
-Product generator improved to get an accurate set of products based on desired amount.
-PayPal benefit implemented, giving the benefit if the number of products is 10+ or the cost amount is 100+
-Generation of some model classes to separate their implementation from logic.
+- Method Order.pay() simplified and distributed in distinct specialized classes.
+- Strategy pattern applied to isolated the distinct types of payments with their own conditions.
+- Condition extended to support one or more attributes to be evaluated.
+- Logger included into the implementation.
+- Unit test to cover the distinct scenarios across the PayOrderSimulator added some negative scenarios.
+- Unit test implemented to test some relevant methods located in condition, discount and payment.
+- Custom exceptions to control minimal quantity and cost supported by the implementation.
+- Product generator improved to get an accurate set of products based on desired amount.
+- PayPal benefit implemented, giving the benefit if the number of products is 10+ or the cost amount is 100+
+- Generation of some model classes to separate their implementation from logic.
 
